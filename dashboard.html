@@ -27,15 +27,6 @@
 </head>
 <body>
   <h1>📱 접속한 기기 목록</h1>
-  <p>아래는 각 기기가 접속했을 때의 정보입니다.</p>
-  <ul>
-    <li><strong>기기 ID:</strong> 기기를 식별하기 위한 이름입니다. (예: phoneA)</li>
-    <li><strong>사용자 에이전트:</strong> 어떤 브라우저와 기기로 접속했는지 나타냅니다.</li>
-    <li><strong>화면 해상도:</strong> 해당 기기의 화면 크기입니다.</li>
-    <li><strong>접속 시각:</strong> 언제 접속했는지 한국 시간 기준으로 보여줍니다.</li>
-    <li><strong>위치 정보:</strong> GPS로 측정된 위도, 경도입니다. (브라우저 허용 시)</li>
-  </ul>
-  <hr />
   <div id="info">로딩 중...</div>
 
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -69,6 +60,7 @@
         infoDiv.innerHTML += `
           <div class="device">
             <h2>기기 ID: ${id}</h2>
+            <p><strong>기기 기종:</strong> ${d.deviceModel || '알 수 없음'}</p>
             <p><strong>사용자 에이전트:</strong> ${d.userAgent || '정보 없음'}</p>
             <p><strong>화면 해상도:</strong> ${d.screenWidth || '?'} x ${d.screenHeight || '?'}</p>
             <p><strong>접속 시각:</strong> ${d.timestamp ? new Date(d.timestamp).toLocaleString('ko-KR') : '정보 없음'}</p>

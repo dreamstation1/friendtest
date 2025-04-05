@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>기기 정보 저장</title>
+</head>
+<body>
+  <h1>기기 정보 전송됨!</h1>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <script>
+    
+const firebaseConfig = {
+  apiKey: "AIzaSyAgjByq8kdcaFGx4Y01z0hHAxwDjeE4WTak",
+  authDomain: "friendtest-1a4ee.firebaseapp.com",
+  databaseURL: "https://friendtest-1a4ee-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "friendtest-1a4ee",
+  storageBucket: "friendtest-1a4ee.appspot.com",
+  messagingSenderId: "10590952555006",
+  appId: "1:10590952555006:web:659c3e9f0ae95f6ac688af",
+  measurementId: "G-P52QQX2TX3"
+};
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const params = new URLSearchParams(window.location.search);
+    const deviceId = params.get('id') || 'unknown';
+
+    const info = {
+      userAgent: navigator.userAgent,
+      screenWidth: window.screen.width,
+      screenHeight: window.screen.height,
+      timestamp: new Date().toISOString()
+    };
+
+    console.log("기기 ID:", deviceId);
+    console.log("보낼 정보:", info);
+
+    db.ref('devices/' + deviceId).set(info)
+      .then(() => console.log("성공적으로 저장됨!"))
+      .catch((err) => console.error("저장 실패:", err));
+  </script>
+</body>
+</html>
